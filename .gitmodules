@@ -1,3 +1,7 @@
 [submodule "src/zed-ros-wrapper"]
 	path = src/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper
+[submodule "src/jetson_csi_cam"]
+	path = src/jetson_csi_cam
+	url = https://bitbucket.org/maruthisi/jetson_csi_cam
+	branch = nano
