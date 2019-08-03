@@ -5,3 +5,6 @@
 	path = src/jetson_csi_cam
 	url = https://bitbucket.org/maruthisi/jetson_csi_cam
 	branch = nano
+[submodule "src/rplidar_ros"]
+	path = src/rplidar_ros
+	url = https://github.com/Slamtec/rplidar_ros
