@@ -17,6 +17,57 @@
     <remap from="/joy_node/dev" to="$(arg js_name)/joy_node/dev" />
   </node>
 
+  <!-- ===================== Donkeycar Manual Driver ==================== -->
+  <!-- Command Line Arguments -->
+
+  <!-- Make arguments available to parameter server -->
+
+  <arg name="start_recording" default="false" />		<!-- Whether to record sensor inputs or not -->
+  <arg name="show_debug" default="false" />			<!-- Whether to print debugs or not -->
+
+  <!-- Steering constants -->
+  <arg name="max_left_angle" default="0.8" />			<!-- Joystick value -->
+  <arg name="max_right_angle" default="-0.8" />			<!-- Joystick value -->
+  <arg name="max_steering_pulse" default="390" />		<!-- ServoMotorController value -->
+  <arg name="min_steering_pulse" default="345" />		<!-- ServoMotorController value -->
+  <arg name="steering_channel" default="1" />			<!-- ServoMotorController value -->
+
+  <!-- Throttle constants -->
+  <arg name="min_throttle" default="-1" />			<!-- Joystick value -->
+  <arg name="max_throttle" default="0.8" />			<!-- Joystick value -->
+  <arg name="zero_pulse" default="381" />			<!-- ServoMotorController value -->
+  <arg name="min_throttle_pulse" default="300" />		<!-- ServoMotorController value -->
+  <arg name="max_throttle_pulse" default="460" />		<!-- ServoMotorController value -->
+  <arg name="throttle_channel" default="0" />			<!-- ServoMotorController value -->
+  <arg name="const_throttle" default="0.22" />			<!-- Joystick value -->
+  <arg name="max_reverse_throttle" default="-0.20" />		<!-- Joystick value  -->
+  <arg name="throttle_auto_drive" default="0.24" />		<!-- Joystick value -->
+  <arg name="const_throttle_step" default="0.001" />		<!-- Joystick value -->
+
+  <param name="/START_RECORDING" type="bool" value="$(arg start_recording)" />
+  <param name="/SHOW_DEBUG" type="bool" value="$(arg show_debug)" />
+  <!-- Steering constants -->
+  <param name="/MAX_LEFT_ANGLE" type="double" value="$(arg max_left_angle)" />
+  <param name="/MIN_RIGHT_ANGLE" type="double" value="$(arg max_right_angle)" />
+  <param name="/MAX_STEERING_PULSE" type="int" value="$(arg max_steering_pulse)" />
+  <param name="/MIN_STEERING_PULSE" type="int" value="$(arg min_steering_pulse)" />
+  <param name="/STEERING_CHANNEL" type="int" value="$(arg steering_channel)" />
+
+  <!-- Throttle constants -->
+  <param name="/MIN_THROTTLE" type="double" value="$(arg min_throttle)" />
+  <param name="/MAX_THROTTLE" type="double" value="$(arg max_throttle)" />
+  <param name="/ZERO_PULSE" type="double" value="$(arg zero_pulse)" />
+  <param name="/MIN_THROTTLE_PULSE" type="int" value="$(arg min_throttle_pulse)" />
+  <param name="/MAX_THROTTLE_PULSE" type="int" value="$(arg max_throttle_pulse)" />
+  <param name="/THROTTLE_CHANNEL" type="double" value="$(arg throttle_channel)" />
+  <param name="/CONST_THROTTLE" type="double" value="$(arg const_throttle)" />
+  <param name="/MAX_REVERSE_THROTTLE" type="double" value="$(arg max_reverse_throttle)" />
+  <param name="/THROTTLE_AUTO_DRIVE" type="double" value="$(arg throttle_auto_drive)" />
+  <param name="/CONST_THROTTLE_STEP" type="double" value="$(arg const_throttle_step)" />
+
+  <!-- Start the manual driving node -->
+  <node pkg="donkeycar" type="manual_drive_node.py" name="manual_drive_node">
+  </node>
   <!-- ====================== Zed Stereo camera ======================== -->
   <!-- Command Line Arguments -->
   <arg name="svo_file"             default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
@@ -74,15 +125,5 @@
     <remap from="camera/image_raw" to="$(arg mono_cam_name)/image_raw" />
     <remap from="/set_camera_info" to="$(arg mono_cam_name)/set_camera_info" />
   </node>
-
-  <!-- **** COMMENTED STUFF **** -->
-  <!--include file="$(find rospy_tutorials)/003_listener_with_user_data/listener_with_user_data.launch" /-->
-
-  <!-- Make arguments available to parameter server -->
-  <!--param name="$(arg mono_cam_name)/camera_id" type="int" value="$(arg sensor_id)" /-->
-
-  <!--env name="GSCAM_CONFIG" value="nvarguscamerasrc sensor-id=$(arg sensor_id) ! video/x-raw(memory:NVMM),
-    width=(int)$(arg width), height=(int)$(arg height), format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! 
-    nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR" /-->
 
 </launch>
