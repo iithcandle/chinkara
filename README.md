@@ -27,14 +27,17 @@ Topics Published:
 
 Initial:
 
+```
 cs18resch01001@nano-ub18:~/AllCode/Maruthi/chinkara/donkeycar_1906$ rosnode list
 /rosout
 cs18resch01001@nano-ub18:~/AllCode/Maruthi/chinkara/donkeycar_1906$ rostopic list
 /rosout
 /rosout_agg
+```
 
 By CSI camera:
 
+```
 cs18resch01001@nano-ub18:~$ rostopic list
 /csi_cam_0/camera_info
 /csi_cam_0/image_raw
@@ -70,10 +73,11 @@ average rate: 20.365
         min: 0.043s max: 0.051s std dev: 0.00058s window: 164
 average rate: 20.362
         min: 0.043s max: 0.051s std dev: 0.00056s window: 184
-
+```
 
 By ZED Stereo camera:
 
+```
 cs18resch01001@nano-ub18:~$ rostopic list
 /diagnostics
 /rosout
@@ -251,7 +255,11 @@ average rate: 99.995
         min: 0.009s max: 0.011s std dev: 0.00046s window: 395
 ^Caverage rate: 99.988
         min: 0.009s max: 0.011s std dev: 0.00045s window: 493
+```
 
+By Slamtec RPLidar:
+
+```
 cs18resch01001@nano-ub18:~$ rosnode list
 /rosout
 /rplidarNode
@@ -326,4 +334,4 @@ no new messages
 no new messages
 no new messages
 ^Cno new messages
-
+```
