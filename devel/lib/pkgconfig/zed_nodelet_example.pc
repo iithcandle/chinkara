@@ -1,8 +1,0 @@
-prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel
-
-Name: zed_nodelet_example
-Description: Description of zed_nodelet_example
-Version: 2.7.0
-Cflags: 
-Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/lib 
-Requires: 

@@ -1,8 +1,0 @@
-prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel
-
-Name: zed_wrapper
-Description: Description of zed_wrapper
-Version: 2.6.0
-Cflags: -I/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/include
-Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/lib 
-Requires: roscpp rosconsole sensor_msgs stereo_msgs image_transport dynamic_reconfigure tf2_ros tf2_geometry_msgs message_runtime

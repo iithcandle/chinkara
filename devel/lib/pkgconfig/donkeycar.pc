@@ -1,8 +1,0 @@
-prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel
-
-Name: donkeycar
-Description: Description of donkeycar
-Version: 0.0.1
-Cflags: 
-Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/lib 
-Requires: 
