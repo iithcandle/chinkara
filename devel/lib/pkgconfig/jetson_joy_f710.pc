@@ -1,0 +1,8 @@
+prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel
+
+Name: jetson_joy_f710
+Description: Description of jetson_joy_f710
+Version: 1.0.0
+Cflags: 
+Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel
+
+Name: zed_ar_track_alvar_example
+Description: Description of zed_ar_track_alvar_example
+Version: 2.6.0
+Cflags: 
+Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/devel/lib 
+Requires: 

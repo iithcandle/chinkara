@@ -63,8 +63,8 @@ class DonkeyCarManualDriver:
         '''
         Received:['__class__', '__delattr__', '__doc__', '__eq__', '__format__', '__getattribute__', '__getstate__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__slots__', '__str__', '__subclasshook__', '_check_types', '_connection_header', '_full_text', '_get_types', '_has_header', '_md5sum', '_slot_types', '_type', 'axes', 'buttons', 'deserialize', 'deserialize_numpy', 'header', 'serialize', 'serialize_numpy']
         '''
-        steering_pulse = self.getActuatorPulseValue(msg.axes[0], self.min_right_angle, self.max_left_angle, self.min_steering_pulse, self.max_steering_pulse, channel_type='steering')
-        throttle_pulse = self.find_max_throttle(msg.axes[3])
+        steering_pulse = self.getActuatorPulseValue(float(msg.axes[0]), self.min_right_angle, self.max_left_angle, self.min_steering_pulse, self.max_steering_pulse, channel_type='steering')
+        throttle_pulse = self.find_max_throttle(float(msg.axes[3]))
         throttle_pulse = self.getActuatorPulseValue(throttle_pulse, self.min_throttle, self.max_throttle, self.min_throttle_pulse, self.max_throttle_pulse, channel_type='throttle')
         self.smc.set_channel_pulse(self.steering_channel, pulse=steering_pulse)
         self.smc.set_channel_pulse(self.throttle_channel, pulse=throttle_pulse)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     rospy.init_node('manual_drive_node')
     rospy.loginfo("[ROS manual_drive_node] started.")
 
-    rospy.Subscriber('/joy', Joy, driver.joyStickSubscriberCallback, queue_size=100)
+    rospy.Subscriber('/joy', Joy, driver.joyStickSubscriberCallback, queue_size=1)
 
     rospy.spin()
 

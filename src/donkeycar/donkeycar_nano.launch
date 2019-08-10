@@ -34,10 +34,10 @@
 
   <!-- Throttle constants -->
   <arg name="min_throttle" default="-1" />			<!-- Joystick value -->
-  <arg name="max_throttle" default="0.8" />			<!-- Joystick value -->
+  <arg name="max_throttle" default="1" />			<!-- Joystick value -->
   <arg name="zero_pulse" default="381" />			<!-- ServoMotorController value -->
   <arg name="min_throttle_pulse" default="300" />		<!-- ServoMotorController value -->
-  <arg name="max_throttle_pulse" default="460" />		<!-- ServoMotorController value -->
+  <arg name="max_throttle_pulse" default="480" />		<!-- ServoMotorController value -->
   <arg name="throttle_channel" default="0" />			<!-- ServoMotorController value -->
   <arg name="const_throttle" default="0.22" />			<!-- Joystick value -->
   <arg name="max_reverse_throttle" default="-0.20" />		<!-- Joystick value  -->
@@ -56,10 +56,10 @@
   <!-- Throttle constants -->
   <param name="/MIN_THROTTLE" type="double" value="$(arg min_throttle)" />
   <param name="/MAX_THROTTLE" type="double" value="$(arg max_throttle)" />
-  <param name="/ZERO_PULSE" type="double" value="$(arg zero_pulse)" />
+  <param name="/ZERO_PULSE" type="int" value="$(arg zero_pulse)" />
   <param name="/MIN_THROTTLE_PULSE" type="int" value="$(arg min_throttle_pulse)" />
   <param name="/MAX_THROTTLE_PULSE" type="int" value="$(arg max_throttle_pulse)" />
-  <param name="/THROTTLE_CHANNEL" type="double" value="$(arg throttle_channel)" />
+  <param name="/THROTTLE_CHANNEL" type="int" value="$(arg throttle_channel)" />
   <param name="/CONST_THROTTLE" type="double" value="$(arg const_throttle)" />
   <param name="/MAX_REVERSE_THROTTLE" type="double" value="$(arg max_reverse_throttle)" />
   <param name="/THROTTLE_AUTO_DRIVE" type="double" value="$(arg throttle_auto_drive)" />

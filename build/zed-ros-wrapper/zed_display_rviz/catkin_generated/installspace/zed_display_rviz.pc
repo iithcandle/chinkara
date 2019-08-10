@@ -1,0 +1,8 @@
+prefix=/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/install
+
+Name: zed_display_rviz
+Description: Description of zed_display_rviz
+Version: 2.7.0
+Cflags: 
+Libs: -L/mnt/home/xt19i0051/chinkara_ws/donkeycar_1906/install/lib 
+Requires: 
