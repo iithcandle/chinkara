@@ -27,7 +27,7 @@ class ServoMotorController:
     def set_channel_pulse(self, channel=1, pulse=420):
         self.channel = channel
         self.pulse = pulse
-        self.pwm.set_pwm(channel, 1, pulse)
+        self.pwm.set_pwm(channel, 0, pulse)
 
 if __name__ == '__main__':
     smc = ServoMotorController()
