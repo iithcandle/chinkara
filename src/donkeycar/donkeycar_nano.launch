@@ -37,7 +37,7 @@
   <arg name="max_throttle" default="1" />			<!-- Joystick value -->
   <arg name="zero_pulse" default="381" />			<!-- ServoMotorController value -->
   <arg name="min_throttle_pulse" default="300" />		<!-- ServoMotorController value -->
-  <arg name="max_throttle_pulse" default="480" />		<!-- ServoMotorController value -->
+  <arg name="max_throttle_pulse" default="520" />		<!-- ServoMotorController value -->
   <arg name="throttle_channel" default="0" />			<!-- ServoMotorController value -->
   <arg name="const_throttle" default="0.22" />			<!-- Joystick value -->
   <arg name="max_reverse_throttle" default="-0.20" />		<!-- Joystick value  -->
