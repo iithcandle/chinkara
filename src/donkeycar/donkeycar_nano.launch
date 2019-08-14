@@ -77,7 +77,7 @@
   <arg name="camera_model"         default="zedm" /> <!-- 'zed' or 'zedm' -->
   <arg name="publish_urdf"         default="true" />
 
-  <group ns="zed">
+  <!--group ns="zed">
         <include file="$(find zed_wrapper)/launch/zed_camera.launch">
             <arg name="svo_file"            value="$(arg svo_file)" />
             <arg name="stream"              value="$(arg stream)" />
@@ -85,7 +85,7 @@
             <arg name="camera_model"        value="$(arg camera_model)" />
             <arg name="publish_urdf"        value="$(arg publish_urdf)" />            
         </include>
-  </group>
+  </group-->
 
   <!-- ====================== Slamtec RPLidar ========================== -->
   <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
@@ -95,6 +95,17 @@
     <param name="frame_id"            type="string" value="laser"/>
     <param name="inverted"            type="bool"   value="false"/>
     <param name="angle_compensate"    type="bool"   value="true"/>
+  </node>
+
+  <!-- ====================== USB CV Camera ============================ -->
+  <node name="my_cv_cam0" pkg="cv_camera" type="cv_camera_node" >
+    <param name="video_device" value="/dev/video0" />
+    <param name="device_id" value="0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="cv_cam0" />
+    <param name="io_method" value="mmap"/>
   </node>
 
   <!-- ====================== PI CSI Camera ============================ -->
