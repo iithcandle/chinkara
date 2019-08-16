@@ -23,6 +23,20 @@ Software used :
 * Robot Operating System (ROS) Melodic for Ubuntu 18
 
 
+Procudure to Build & Run :
+
+
+```
+$ git clone https://bitbucket.org/maruthisi/chinkara -b donkeycar_1906 donkeycar_1906 --recurse-submodules
+$ cd donkeycar_1906/src
+$ catkin_init_workspace
+$ cd ..
+$ catkin_build
+$ source /opt/ros/melodic/setup.bash
+$ source devel/setup.bash
+$ roslaunch donkeycar donkeycar_nano.launch
+```
+
 Topics Published:
 
 Initial:
