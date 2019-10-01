@@ -34,7 +34,7 @@ $ cd ..
 $ catkin_build
 $ source /opt/ros/melodic/setup.bash
 $ source devel/setup.bash
-$ roslaunch donkeycar donkeycar_nano.launch
+$ roslaunch donkeycar donkeycar_nano_manual.launch
 ```
 
 Topics Published:
