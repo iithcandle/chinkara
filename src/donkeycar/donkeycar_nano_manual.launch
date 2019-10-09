@@ -1,0 +1,140 @@
+<launch>
+  <!-- ====================== Overall Params ============================ -->
+  <!-- Command Line Arguments -->
+  <arg name="kit" default="nano" />                       <!-- The name of the kit used on the car -->
+  <arg name="mode" default="manual" />                    <!-- Driving mode of the car (manual, auto) -->
+
+  <!-- ====================== Logitech F710 joystick ==================== -->
+  <!-- Command Line Arguments -->
+  <arg name="js_name" default="jetson_joy_f710" />             <!-- The device special file name of F710 -->
+  <arg name="js_device" default="/dev/input/js0" />             <!-- The device special file name of F710 -->
+
+  <!-- Make arguments available to parameter server -->
+
+  <!-- Start the Joy node -->
+  <node pkg="joy" type="joy_node" name="jetson_joy_f710">
+    <param name="joy_node/dev" type="string" value="$(arg js_device)" />
+    <remap from="/joy_node/dev" to="$(arg js_name)/joy_node/dev" />
+  </node>
+
+  <!-- ===================== Donkeycar Manual Driver ==================== -->
+  <!-- Command Line Arguments -->
+
+  <!-- Make arguments available to parameter server -->
+
+  <arg name="start_recording" default="false" />		<!-- Whether to record sensor inputs or not -->
+  <arg name="show_debug" default="false" />			<!-- Whether to print debugs or not -->
+
+  <!-- Steering constants -->
+  <arg name="max_left_angle" default="0.8" />			<!-- Joystick value -->
+  <arg name="max_right_angle" default="-0.8" />			<!-- Joystick value -->
+  <arg name="max_steering_pulse" default="390" />		<!-- ServoMotorController value -->
+  <arg name="min_steering_pulse" default="345" />		<!-- ServoMotorController value -->
+  <arg name="steering_channel" default="1" />			<!-- ServoMotorController value -->
+
+  <!-- Throttle constants -->
+  <arg name="min_throttle" default="-1" />			<!-- Joystick value -->
+  <arg name="max_throttle" default="1" />			<!-- Joystick value -->
+  <arg name="zero_pulse" default="381" />			<!-- ServoMotorController value -->
+  <arg name="min_throttle_pulse" default="300" />		<!-- ServoMotorController value -->
+  <arg name="max_throttle_pulse" default="520" />		<!-- ServoMotorController value -->
+  <arg name="throttle_channel" default="0" />			<!-- ServoMotorController value -->
+  <arg name="const_throttle" default="0.22" />			<!-- Joystick value -->
+  <arg name="max_reverse_throttle" default="-0.20" />		<!-- Joystick value  -->
+  <arg name="throttle_auto_drive" default="0.24" />		<!-- Joystick value -->
+  <arg name="const_throttle_step" default="0.001" />		<!-- Joystick value -->
+
+  <param name="/START_RECORDING" type="bool" value="$(arg start_recording)" />
+  <param name="/SHOW_DEBUG" type="bool" value="$(arg show_debug)" />
+  <!-- Steering constants -->
+  <param name="/MAX_LEFT_ANGLE" type="double" value="$(arg max_left_angle)" />
+  <param name="/MIN_RIGHT_ANGLE" type="double" value="$(arg max_right_angle)" />
+  <param name="/MAX_STEERING_PULSE" type="int" value="$(arg max_steering_pulse)" />
+  <param name="/MIN_STEERING_PULSE" type="int" value="$(arg min_steering_pulse)" />
+  <param name="/STEERING_CHANNEL" type="int" value="$(arg steering_channel)" />
+
+  <!-- Throttle constants -->
+  <param name="/MIN_THROTTLE" type="double" value="$(arg min_throttle)" />
+  <param name="/MAX_THROTTLE" type="double" value="$(arg max_throttle)" />
+  <param name="/ZERO_PULSE" type="int" value="$(arg zero_pulse)" />
+  <param name="/MIN_THROTTLE_PULSE" type="int" value="$(arg min_throttle_pulse)" />
+  <param name="/MAX_THROTTLE_PULSE" type="int" value="$(arg max_throttle_pulse)" />
+  <param name="/THROTTLE_CHANNEL" type="int" value="$(arg throttle_channel)" />
+  <param name="/CONST_THROTTLE" type="double" value="$(arg const_throttle)" />
+  <param name="/MAX_REVERSE_THROTTLE" type="double" value="$(arg max_reverse_throttle)" />
+  <param name="/THROTTLE_AUTO_DRIVE" type="double" value="$(arg throttle_auto_drive)" />
+  <param name="/CONST_THROTTLE_STEP" type="double" value="$(arg const_throttle_step)" />
+
+  <!-- Start the manual driving node -->
+  <node pkg="donkeycar" type="manual_drive_node.py" name="manual_drive_node">
+  </node>
+  <!-- ====================== Zed Stereo camera ======================== -->
+  <!-- Command Line Arguments -->
+  <arg name="svo_file"             default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+  <arg name="stream"               default="" /> <!-- <arg name="stream" default="<ip_address>:<port>"> -->
+
+  <arg name="node_name"            default="zed_node" />
+  <arg name="camera_model"         default="zedm" /> <!-- 'zed' or 'zedm' -->
+  <arg name="publish_urdf"         default="true" />
+
+  <!--group ns="zed">
+        <include file="$(find zed_wrapper)/launch/zed_camera.launch">
+            <arg name="svo_file"            value="$(arg svo_file)" />
+            <arg name="stream"              value="$(arg stream)" />
+            <arg name="node_name"           value="$(arg node_name)" />
+            <arg name="camera_model"        value="$(arg camera_model)" />
+            <arg name="publish_urdf"        value="$(arg publish_urdf)" />            
+        </include>
+  </group-->
+
+  <!-- ====================== Slamtec RPLidar ========================== -->
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
+    <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+  </node>
+
+  <!-- ====================== USB CV Camera ============================ -->
+  <node name="my_cv_cam0" pkg="cv_camera" type="cv_camera_node" >
+    <param name="video_device" value="/dev/video0" />
+    <param name="device_id" value="0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="cv_cam0" />
+    <param name="io_method" value="mmap"/>
+  </node>
+
+  <!-- ====================== PI CSI Camera ============================ -->
+  <!-- Command Line Arguments -->
+  <arg name="sensor_id" default="0" />                       <!-- The sensor id of the camera -->
+  <arg name="cam_name" default="csi_cam_$(arg sensor_id)" /> <!-- The name of the camera (corrsponding to the camera info) -->
+  <arg name="frame_id" default="/$(arg cam_name)_link" />    <!-- The TF frame ID. -->
+  <arg name="sync_sink" default="true" />                    <!-- Synchronize the app sink. Setting this to false may resolve problems with sub-par framerates. -->
+  <arg name="width" default="640" />                         <!-- Image Width -->
+  <arg name="height" default="480" />                        <!-- Image Height -->
+  <arg name="fps" default="21" />                            <!-- Desired framerate. True framerate may not reach this if set too high. -->
+
+  <!-- Make arguments available to parameter server -->
+  <param name="$(arg cam_name)/camera_id" type="int" value="$(arg sensor_id)" />
+  <param name="$(arg cam_name)/image_width" type="int" value="$(arg width)" />
+  <param name="$(arg cam_name)/image_height" type="int" value="$(arg height)" />
+  <param name="$(arg cam_name)/target_fps" type="int" value="$(arg fps)" />
+
+  <env name="GSCAM_CONFIG" value="nvarguscamerasrc sensor-id=$(arg sensor_id) ! video/x-raw(memory:NVMM),
+    width=(int)$(arg width), height=(int)$(arg height), format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! 
+    nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR" />
+
+  <!-- Start the GSCAM node -->
+  <!--node pkg="gscam" type="gscam" name="$(arg cam_name)">
+    <param name="camera_name" value="$(arg cam_name)" />
+    <param name="frame_id" value="$(arg frame_id)" />
+    <param name="sync_sink" value="$(arg sync_sink)" />
+    <remap from="camera/image_raw" to="$(arg cam_name)/image_raw" />
+    <remap from="/set_camera_info" to="$(arg cam_name)/set_camera_info" />
+  </node-->
+
+</launch>

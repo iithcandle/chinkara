@@ -1,0 +1,13 @@
+<launch>
+  <!-- Command Line Arguments -->
+  <arg name="js_name" default="jetson_joy_f710" />             <!-- The device special file name of F710 -->
+  <arg name="js_device" default="/dev/input/js0" />             <!-- The device special file name of F710 -->
+
+  <!-- Make arguments available to parameter server -->
+
+  <!-- Start the Joy node -->
+  <node pkg="joy" type="joy_node" name="jetson_joy_f710">
+    <param name="joy_node/dev" type="string" value="$(arg js_device)" />
+    <remap from="/joy_node/dev" to="$(arg myname)/joy_node/dev" />
+  </node>
+</launch>

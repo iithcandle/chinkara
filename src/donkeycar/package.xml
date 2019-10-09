@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>donkeycar</name>
+  <version>0.0.1</version>
+  <description>The donkeycar package</description>
+
+  <maintainer email="candle-lab-cse@iith.ac.in">CANDLE Research Lab, IIT Hyderabad</maintainer>
+  <license>GPLv3</license>
+
+  <url type="website">https://bitbucket.org/maruthisi/chinkara</url>
+
+  <author email="maruthi.inukonda@gmail.com">Maruthi S. Inukonda</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <exec_depend>jetson_csi_cam</exec_depend>
+  <exec_depend>gscam</exec_depend>
+  <exec_depend>joy</exec_depend>
+  <exec_depend>rplidar_ros</exec_depend>
+  <exec_depend>zed-ros-wrapper</exec_depend>
+</package>
