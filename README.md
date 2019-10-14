@@ -37,17 +37,4 @@ $ source devel/setup.bash
 $ roslaunch donkeycar donkeycar_nano_manual.launch
 ```
 
-Topics Published:
-
-Initial:
-
-```
-cs18resch01001@nano-ub18:~$ rosnode list
-/rosout
-cs18resch01001@nano-ub18:~$ rostopic list
-/rosout
-/rosout_agg
-```
-
-
 
