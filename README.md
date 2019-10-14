@@ -27,8 +27,8 @@ Procudure to Build & Run :
 
 
 ```
-$ git clone https://bitbucket.org/maruthisi/chinkara -b donkeycar_1906 donkeycar_1906 --recurse-submodules
-$ cd donkeycar_1906/src
+$ git clone https://github.com/iithcandle/chinkara --recurse-submodules
+$ cd chinkara/src
 $ catkin_init_workspace
 $ cd ..
 $ catkin_build
